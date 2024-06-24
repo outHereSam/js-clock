@@ -10,6 +10,40 @@ const clockObj = {
   hour: new Date().getHours(),
   minute: new Date().getMinutes(),
   second: new Date().getSeconds(),
+  day: new Date().getDay(),
+  month: new Date().getMonth(),
+  year: new Date().getFullYear(),
+  date: new Date().getDate(),
+
+  getDayAndDate() {
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    // Monday 24 June 2024
+    return `${days[this.day]}, ${this.date} ${months[this.month]} ${this.year}`;
+  },
 
   getFormattedTime() {
     if (this.second < 10) {
@@ -36,13 +70,14 @@ const clockObj = {
   },
 };
 
-console.log(clockObj.getFormattedTime());
-
 // Task 4: Dynamic Display
 const displayClock = () => {
   clockObj.updateTime();
   const timeDiv = document.getElementById("time");
   timeDiv.innerText = clockObj.getFormattedTime();
+
+  const extraInfo = document.querySelector(".extra");
+  extraInfo.innerText = clockObj.getDayAndDate();
 };
 
 // Display time every second

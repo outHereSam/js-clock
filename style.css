@@ -19,8 +19,36 @@ input {
   color: #ffffff;
   padding: 20px;
   border-radius: 8px;
+  text-align: center;
 }
 
 #time {
   font-size: 32px;
+  margin: 10px;
+}
+
+.switcher {
+  /* border: solid 1px pink; */
+  background-color: #2d2d31;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.switcher button {
+  background-color: #3a3b40;
+  border: none;
+  color: #afadb5;
+  font-size: 18px;
+  padding: 8px 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.switcher button:hover {
+  background-color: #484a50;
+}
+
+.extra {
+  color: #807e85;
 }
