@@ -12,6 +12,8 @@ input {
 body {
   height: 100vh;
   display: flex;
+  flex-direction: column;
+  color: #ffffff;
   justify-content: center;
   align-items: center;
   background-color: #18191c;
@@ -83,5 +85,12 @@ body {
 
 #alarm {
   margin: 0 auto 15px auto;
-  display: none;
+  /* display: none; */
+}
+
+.alert {
+  background-color: #ff3d87;
+  margin: 0 0 20px 0;
+  padding: 8px 15px;
+  border-radius: 8px;
 }

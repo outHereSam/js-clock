@@ -19,8 +19,10 @@
     <title>JS Clock</title>
   </head>
   <body>
+    <div class="alert"></div>
     <div class="clock">
       <div class="alarm">
+        <input type="time" id="alarm" />
         <button id="setAlarm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +40,6 @@
           </svg>
           Set Alarm
         </button>
-        <input type="time" id="alarm" />
       </div>
       <div class="switcher">
         <button id="twelveHour" class="selected">12-Hour</button>

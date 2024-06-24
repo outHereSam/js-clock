@@ -34,6 +34,7 @@ const clockObj = {
   year: new Date().getFullYear(),
   date: new Date().getDate(),
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  alarmSound: new Audio("./alarm.m4a"),
 
   getDayAndDate() {
     const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
@@ -136,4 +137,38 @@ setInterval(() => {
 const alarmButton = document.getElementById("setAlarm");
 const alarmInput = document.getElementById("alarm");
 
-alarmButton.addEventListener("click", () => {});
+const setAlarm = (hour, minute) => {
+  const now = new Date();
+
+  let alarm = new Date();
+  alarm.setHours(hour, minute, 0, 0); // Set the hours and minutes, seconds and milliseconds to 0
+
+  // If the alarm time is earlier than the current time, set it for the next day
+  if (alarm <= now) {
+    alarm.setDate(alarm.getDate() + 1);
+  }
+
+  // Calculate the time difference in milliseconds
+  const timeDifference = alarm - now;
+  document.querySelector(
+    ".alert"
+  ).innerText = `Alarm is set for ${alarm.toLocaleTimeString()}`;
+
+  //   console.log(`Alarm is set for ${alarm.toLocaleTimeString()}`);
+
+  // Use setTimeout to trigger the alarm
+  setTimeout(() => {
+    clockObj.alarmSound.play();
+    document.querySelector(".alert").innerText = "Alarm! Time to wake up!";
+    // console.log("Alarm! Time to wake up!");
+    // Here you can add any action you want to perform when the alarm goes off
+  }, timeDifference);
+};
+
+alarmButton.addEventListener("click", () => {
+  if (alarmInput.value) {
+    const [hour, minute] = alarmInput.value.split(":").map(Number);
+    // console.log(alarmInput.value);
+    setAlarm(hour, minute);
+  }
+});
