@@ -7,9 +7,21 @@ const seconds = newDate.getSeconds();
 
 // Task 2: Object-Oriented Clock
 const clockObj = {
-  hours: new Date().getHours(),
-  minutes: new Date().getMinutes,
-  seconds: new Date().getSeconds,
+  hour: new Date().getHours(),
+  minute: new Date().getMinutes(),
+  second: new Date().getSeconds(),
+
+  getFormattedTime() {
+    return `${this.hour}:${this.minute}:${this.second} ${this.get12HourTime()}`;
+  },
+
+  get12HourTime() {
+    if (this.hour < 12) {
+      return "AM";
+    } else {
+      return "PM";
+    }
+  },
 };
 
-console.log(clockObj.hours);
+console.log(clockObj.getFormattedTime());
