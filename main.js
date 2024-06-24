@@ -103,6 +103,11 @@ const displayClock = () => {
   extraInfo.innerText = clockObj.getDayAndDate();
 
   //   Set 12-hour as default selected
+  if (is12hr) {
+    document.getElementById("twelveHour").style.backgroundColor = "#656870";
+  } else {
+    document.getElementById("twelveHour").style.backgroundColor = "#3a3b40";
+  }
 };
 
 // Display time every second
