@@ -7,6 +7,9 @@
 body,
 input {
   font-family: "Space Mono", monospace;
+}
+
+body {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -57,4 +60,28 @@ input {
   color: #807e85;
   /* max-width: 150px;
   text-align: center; */
+}
+
+#setAlarm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  color: #afadb5;
+  background-color: #3a3b40;
+  padding: 5px 8px;
+  border-radius: 8px;
+  margin: 0 auto 20px auto;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#setAlarm:hover {
+  background-color: #64656d;
+}
+
+#alarm {
+  margin: 0 auto 15px auto;
+  display: none;
 }

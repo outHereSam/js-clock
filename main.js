@@ -14,13 +14,11 @@ switcherContainer.addEventListener("click", function (e) {
     document.getElementById("twelveHour").style.backgroundColor = "#656870";
     document.getElementById("twentyFourHour").style.backgroundColor = "#3a3b40";
     is12hr = true;
-    console.log(is12hr);
   }
   if (e.target.innerText === "24-Hour") {
     document.getElementById("twelveHour").style.backgroundColor = "#3a3b40";
     document.getElementById("twentyFourHour").style.backgroundColor = "#656870";
     is12hr = false;
-    console.log(is12hr);
   }
 });
 
@@ -76,6 +74,15 @@ const clockObj = {
             is12hr ? this.get12HourTime() : ""
           }`;
     }
+    if (this.minute < 10) {
+      return this.hour > 12
+        ? `${is12hr ? this.hour - 12 : this.hour}:0${this.minute}:${
+            this.second
+          } ${is12hr ? this.get12HourTime() : ""}`
+        : `${this.hour}:0${this.minute}:${this.second} ${
+            is12hr ? this.get12HourTime() : ""
+          }`;
+    }
     return this.hour > 12
       ? `${is12hr ? this.hour - 12 : this.hour}:${this.minute}:${this.second} ${
           is12hr ? this.get12HourTime() : ""
@@ -122,3 +129,9 @@ const displayClock = () => {
 setInterval(() => {
   displayClock();
 }, 1000);
+
+// Add alarm
+const alarmButton = document.getElementById("setAlarm");
+const alarmInput = document.getElementById("alarm");
+
+alarmButton.addEventListener("click", () => {});
