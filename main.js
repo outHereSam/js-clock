@@ -12,6 +12,11 @@ const clockObj = {
   second: new Date().getSeconds(),
 
   getFormattedTime() {
+    if (this.second < 10) {
+      return `${this.hour}:${this.minute}:0${
+        this.second
+      } ${this.get12HourTime()}`;
+    }
     return `${this.hour}:${this.minute}:${this.second} ${this.get12HourTime()}`;
   },
 
@@ -22,6 +27,25 @@ const clockObj = {
       return "PM";
     }
   },
+
+  updateTime() {
+    const now = new Date();
+    this.hour = now.getHours();
+    this.minute = now.getMinutes();
+    this.second = now.getSeconds();
+  },
 };
 
 console.log(clockObj.getFormattedTime());
+
+// Task 4: Dynamic Display
+const displayClock = () => {
+  clockObj.updateTime();
+  const timeDiv = document.getElementById("time");
+  timeDiv.innerText = clockObj.getFormattedTime();
+};
+
+// Display time every second
+setInterval(() => {
+  displayClock();
+}, 1000);
