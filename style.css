@@ -32,9 +32,13 @@ input {
   background-color: #2d2d31;
   border-radius: 25px;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
 }
 
 .switcher button {
+  width: 100%;
   background-color: #3a3b40;
   border: none;
   color: #afadb5;
@@ -51,4 +55,6 @@ input {
 
 .extra {
   color: #807e85;
+  /* max-width: 150px;
+  text-align: center; */
 }

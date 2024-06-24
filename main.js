@@ -5,6 +5,23 @@ const hours = newDate.getHours();
 const minutes = newDate.getMinutes();
 const seconds = newDate.getSeconds();
 
+let is12hr = true;
+
+const switcherContainer = document.querySelector(".switcher");
+
+switcherContainer.addEventListener("click", function (e) {
+  if (e.target.innerText === "12-Hour") {
+    is12hr = true;
+    console.log(is12hr);
+    return;
+  }
+  if (e.target.innerText === "24-Hour") {
+    is12hr = false;
+    console.log(is12hr);
+    return;
+  }
+});
+
 // Task 2: Object-Oriented Clock
 const clockObj = {
   hour: new Date().getHours(),
@@ -14,6 +31,7 @@ const clockObj = {
   month: new Date().getMonth(),
   year: new Date().getFullYear(),
   date: new Date().getDate(),
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 
   getDayAndDate() {
     const days = [
@@ -42,7 +60,9 @@ const clockObj = {
     ];
 
     // Monday 24 June 2024
-    return `${days[this.day]}, ${this.date} ${months[this.month]} ${this.year}`;
+    return `${days[this.day]}, ${this.date} ${months[this.month]} ${
+      this.year
+    } ${this.timezone}`;
   },
 
   getFormattedTime() {
@@ -78,6 +98,9 @@ const displayClock = () => {
 
   const extraInfo = document.querySelector(".extra");
   extraInfo.innerText = clockObj.getDayAndDate();
+
+  //   Set 12-hour as default selected
+  document.getElementById("twelveHour").style.backgroundColor = "#656870";
 };
 
 // Display time every second
