@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+input {
+  font-family: "Space Mono", monospace;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #18191c;
+}
+
+.clock {
+  background-color: #222326;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+}
