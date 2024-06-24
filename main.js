@@ -11,16 +11,20 @@ const switcherContainer = document.querySelector(".switcher");
 
 switcherContainer.addEventListener("click", function (e) {
   if (e.target.innerText === "12-Hour") {
+    document.getElementById("twelveHour").style.backgroundColor = "#656870";
+    document.getElementById("twentyFourHour").style.backgroundColor = "#3a3b40";
     is12hr = true;
     console.log(is12hr);
-    return;
   }
   if (e.target.innerText === "24-Hour") {
+    document.getElementById("twelveHour").style.backgroundColor = "#3a3b40";
+    document.getElementById("twentyFourHour").style.backgroundColor = "#656870";
     is12hr = false;
     console.log(is12hr);
-    return;
   }
 });
+
+// console.log(is12hr);
 
 // Task 2: Object-Oriented Clock
 const clockObj = {
@@ -34,15 +38,7 @@ const clockObj = {
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 
   getDayAndDate() {
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+    const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
 
     const months = [
       "January",
@@ -60,18 +56,25 @@ const clockObj = {
     ];
 
     // Monday 24 June 2024
-    return `${days[this.day]}, ${this.date} ${months[this.month]} ${
-      this.year
-    } ${this.timezone}`;
+    return `${days[this.day]}, ${this.date} ${months[this.month]} ${this.year} 
+      ${this.timezone}`;
+  },
+
+  set24Hour() {
+    if (!is12hr) {
+      this.hour = this.hour + 12;
+    }
   },
 
   getFormattedTime() {
     if (this.second < 10) {
-      return `${this.hour}:${this.minute}:0${
-        this.second
-      } ${this.get12HourTime()}`;
+      return `${this.hour}:${this.minute}:0${this.second} ${
+        is12hr ? this.get12HourTime() : ""
+      }`;
     }
-    return `${this.hour}:${this.minute}:${this.second} ${this.get12HourTime()}`;
+    return `${this.hour}:${this.minute}:${this.second} ${
+      is12hr ? this.get12HourTime() : ""
+    }`;
   },
 
   get12HourTime() {
@@ -100,7 +103,6 @@ const displayClock = () => {
   extraInfo.innerText = clockObj.getDayAndDate();
 
   //   Set 12-hour as default selected
-  document.getElementById("twelveHour").style.backgroundColor = "#656870";
 };
 
 // Display time every second
