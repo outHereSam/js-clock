@@ -68,13 +68,13 @@ const clockObj = {
 
   getFormattedTime() {
     if (this.second < 10) {
-      return `${this.hour}:${this.minute}:0${this.second} ${
-        is12hr ? this.get12HourTime() : ""
-      }`;
+      return `${is12hr ? this.hour - 12 : this.hour}:${this.minute}:0${
+        this.second
+      } ${is12hr ? this.get12HourTime() : ""}`;
     }
-    return `${this.hour}:${this.minute}:${this.second} ${
-      is12hr ? this.get12HourTime() : ""
-    }`;
+    return `${is12hr ? this.hour - 12 : this.hour}:${this.minute}:${
+      this.second
+    } ${is12hr ? this.get12HourTime() : ""}`;
   },
 
   get12HourTime() {
