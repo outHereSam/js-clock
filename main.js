@@ -8,6 +8,11 @@ const seconds = newDate.getSeconds();
 let is12hr = true;
 
 const switcherContainer = document.querySelector(".switcher");
+const popupMessage = document.querySelector(".info");
+
+if (popupMessage.textContent === "") {
+  popupMessage.style.display = "none";
+}
 
 switcherContainer.addEventListener("click", function (e) {
   if (e.target.innerText === "12-Hour") {
@@ -152,9 +157,8 @@ const setAlarm = (hour, minute) => {
 
   // Calculate the time difference in milliseconds
   const timeDifference = alarm - now;
-  document.querySelector(
-    ".info"
-  ).innerText = `Alarm is set for ${alarm.toLocaleTimeString()}`;
+  popupMessage.style.display = "block";
+  popupMessage.textContent = `Alarm is set for ${alarm.toLocaleTimeString()}`;
 
   setTimeout(() => {
     // Clear the alert
