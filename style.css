@@ -25,11 +25,13 @@ body {
   padding: 20px;
   border-radius: 8px;
   text-align: center;
+  width: 360px;
 }
 
 #time {
   font-size: 32px;
   margin: 10px;
+  transition: color 0.2s ease-in-out;
 }
 
 .switcher {
@@ -62,6 +64,7 @@ body {
   color: #807e85;
   /* max-width: 150px;
   text-align: center; */
+  transition: color 0.2s ease-in-out;
 }
 
 #setAlarm {
@@ -88,9 +91,14 @@ body {
   /* display: none; */
 }
 
-.alert {
+.alert,
+.info {
   background-color: #ff3d87;
   margin: 0 0 20px 0;
   padding: 8px 15px;
   border-radius: 8px;
+}
+
+.alert {
+  display: none;
 }

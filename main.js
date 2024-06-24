@@ -122,16 +122,18 @@ const displayClock = () => {
   if (is12hr) {
     document.getElementById("twelveHour").style.backgroundColor = "#656870";
     time.style.color = "#ffffff";
+    document.querySelector(".extra").style.color = "#ffffff";
   } else {
     document.getElementById("twelveHour").style.backgroundColor = "#3a3b40";
     time.style.color = "#CCACFF";
+    document.querySelector(".extra").style.color = "#CCACFF";
   }
 };
 
 // Display time every second
 setInterval(() => {
   displayClock();
-}, 1000);
+}, 500);
 
 // Add alarm
 const alarmButton = document.getElementById("setAlarm");
@@ -151,17 +153,27 @@ const setAlarm = (hour, minute) => {
   // Calculate the time difference in milliseconds
   const timeDifference = alarm - now;
   document.querySelector(
-    ".alert"
+    ".info"
   ).innerText = `Alarm is set for ${alarm.toLocaleTimeString()}`;
+
+  setTimeout(() => {
+    // Clear the alert
+    document.querySelector(".info").style.display = "none";
+  }, 5000);
 
   //   console.log(`Alarm is set for ${alarm.toLocaleTimeString()}`);
 
   // Use setTimeout to trigger the alarm
   setTimeout(() => {
     clockObj.alarmSound.play();
-    document.querySelector(".alert").innerText = "Alarm! Time to wake up!";
+    document.querySelector(".alert").style.display = "block";
+    document.querySelector(".alert").innerText = "Alarm!!";
     // console.log("Alarm! Time to wake up!");
     // Here you can add any action you want to perform when the alarm goes off
+
+    setTimeout(() => {
+      document.querySelector(".alert").style.display = "none";
+    }, 60000);
   }, timeDifference);
 };
 
