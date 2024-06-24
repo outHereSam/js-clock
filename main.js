@@ -111,8 +111,8 @@ const clockObj = {
 // Task 4: Dynamic Display
 const displayClock = () => {
   clockObj.updateTime();
-  const timeDiv = document.getElementById("time");
-  timeDiv.innerText = clockObj.getFormattedTime();
+  const time = document.getElementById("time");
+  time.innerText = clockObj.getFormattedTime();
 
   const extraInfo = document.querySelector(".extra");
   extraInfo.innerText = clockObj.getDayAndDate();
@@ -120,8 +120,10 @@ const displayClock = () => {
   //   Set 12-hour as default selected
   if (is12hr) {
     document.getElementById("twelveHour").style.backgroundColor = "#656870";
+    time.style.color = "#ffffff";
   } else {
     document.getElementById("twelveHour").style.backgroundColor = "#3a3b40";
+    time.style.color = "#CCACFF";
   }
 };
 
