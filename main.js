@@ -42,6 +42,7 @@ const clockObj = {
   year: new Date().getFullYear(),
   date: new Date().getDate(),
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  timezoneDifference: 0,
   alarmSound: new Audio("./alarm.m4a"),
 
   getDayAndDate() {
@@ -74,29 +75,33 @@ const clockObj = {
   },
 
   getFormattedTime() {
+    let adjustedHour = this.hour + this.timezoneDifference;
+    if (adjustedHour < 0) adjustedHour += 24;
+    if (adjustedHour >= 24) adjustedHour -= 24;
+
     if (this.second < 10) {
-      return this.hour > 12
-        ? `${is12hr ? this.hour - 12 : this.hour}:${this.minute}:0${
+      return adjustedHour > 12
+        ? `${is12hr ? adjustedHour - 12 : adjustedHour}:${this.minute}:0${
             this.second
           } ${is12hr ? this.get12HourTime() : ""}`
-        : `${this.hour}:${this.minute}:0${this.second} ${
+        : `${adjustedHour}:${this.minute}:0${this.second} ${
             is12hr ? this.get12HourTime() : ""
           }`;
     }
     if (this.minute < 10) {
-      return this.hour > 12
-        ? `${is12hr ? this.hour - 12 : this.hour}:0${this.minute}:${
+      return adjustedHour > 12
+        ? `${is12hr ? adjustedHour - 12 : adjustedHour}:0${this.minute}:${
             this.second
           } ${is12hr ? this.get12HourTime() : ""}`
-        : `${this.hour}:0${this.minute}:${this.second} ${
+        : `${adjustedHour}:0${this.minute}:${this.second} ${
             is12hr ? this.get12HourTime() : ""
           }`;
     }
-    return this.hour > 12
-      ? `${is12hr ? this.hour - 12 : this.hour}:${this.minute}:${this.second} ${
-          is12hr ? this.get12HourTime() : ""
-        }`
-      : `${this.hour}:${this.minute}:${this.second} ${
+    return adjustedHour > 12
+      ? `${is12hr ? adjustedHour - 12 : adjustedHour}:${this.minute}:${
+          this.second
+        } ${is12hr ? this.get12HourTime() : ""}`
+      : `${adjustedHour}:${this.minute}:${this.second} ${
           is12hr ? this.get12HourTime() : ""
         }`;
   },
@@ -115,6 +120,14 @@ const clockObj = {
     this.hour = now.getHours();
     this.minute = now.getMinutes();
     this.second = now.getSeconds();
+    this.day = now.getDay();
+    this.month = now.getMonth();
+    this.year = now.getFullYear();
+    this.date = now.getDate();
+  },
+
+  setTimezone(timezoneDifference) {
+    this.timezoneDifference = timezoneDifference;
   },
 };
 
@@ -142,18 +155,6 @@ const displayClock = () => {
     document.querySelector(".extra").style.color = "#CCACFF";
   }
 };
-
-// Display time every second
-setInterval(() => {
-  displayClock();
-}, 500);
-
-timezoneSelector.addEventListener("change", function () {
-  //   update clock object's hour
-  // clockObj.hour += +this.value;
-  const selectedOption = this.options[this.selectedIndex];
-  clockObj.timezone = selectedOption.innerText;
-});
 
 // Add alarm
 const alarmButton = document.getElementById("setAlarm");
@@ -203,3 +204,20 @@ alarmButton.addEventListener("click", () => {
     setAlarm(hour, minute);
   }
 });
+
+// Set timezone
+timezoneSelector.addEventListener("change", function () {
+  //   update clock object's hour
+  const timezoneValue = +this.value;
+  const selectedOption = this.options[this.selectedIndex];
+  clockObj.timezone = selectedOption.innerText;
+  clockObj.setTimezone(timezoneValue);
+
+  console.log(clockObj.getFormattedTime());
+});
+
+// Display time every second
+
+setInterval(() => {
+  displayClock();
+}, 500);
