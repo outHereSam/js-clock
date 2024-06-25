@@ -10,6 +10,9 @@ let is12hr = true;
 const switcherContainer = document.querySelector(".switcher");
 const popupMessage = document.querySelector(".info");
 
+// Timezone Selector
+const timezoneSelector = document.getElementById("timezoneSelector");
+
 if (popupMessage.textContent === "") {
   popupMessage.style.display = "none";
 }
@@ -108,6 +111,7 @@ const clockObj = {
 
   updateTime() {
     const now = new Date();
+
     this.hour = now.getHours();
     this.minute = now.getMinutes();
     this.second = now.getSeconds();
@@ -126,10 +130,14 @@ const displayClock = () => {
   //   Set 12-hour as default selected
   if (is12hr) {
     document.getElementById("twelveHour").style.backgroundColor = "#656870";
+    document.getElementById("twelveHour").style.color = "#ffffff";
+    document.getElementById("twentyFourHour").style.color = "#afadb5";
     time.style.color = "#ffffff";
     document.querySelector(".extra").style.color = "#ffffff";
   } else {
     document.getElementById("twelveHour").style.backgroundColor = "#3a3b40";
+    document.getElementById("twentyFourHour").style.color = "#ffffff";
+    document.getElementById("twelveHour").style.color = "#afadb5";
     time.style.color = "#CCACFF";
     document.querySelector(".extra").style.color = "#CCACFF";
   }
@@ -139,6 +147,13 @@ const displayClock = () => {
 setInterval(() => {
   displayClock();
 }, 500);
+
+timezoneSelector.addEventListener("change", function () {
+  //   update clock object's hour
+  // clockObj.hour += +this.value;
+  const selectedOption = this.options[this.selectedIndex];
+  clockObj.timezone = selectedOption.innerText;
+});
 
 // Add alarm
 const alarmButton = document.getElementById("setAlarm");
