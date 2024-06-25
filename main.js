@@ -212,8 +212,6 @@ timezoneSelector.addEventListener("change", function () {
   const selectedOption = this.options[this.selectedIndex];
   clockObj.timezone = selectedOption.innerText;
   clockObj.setTimezone(timezoneValue);
-
-  console.log(clockObj.getFormattedTime());
 });
 
 // Display time every second
